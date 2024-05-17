@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import NewUserPlaceholder from "../../_components/new-user-placeholder";
 
-export function Page() {
+export default function Page() {
   const router = useRouter();
   const createDocument = useMutation(api.documents.createDocument);
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -29,5 +29,3 @@ export function Page() {
     </>
   );
 }
-
-export default Page
