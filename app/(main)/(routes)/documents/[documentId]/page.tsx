@@ -11,22 +11,22 @@ import { useContext, useMemo } from "react";
 import { WidthContext } from "@/contexts/WidthContext";
 interface Page {
   params: {
-    documentId: Id<"documents">;
+    documentId: any;
   };
 }
-export default function DocumentIdPage({ params }: Page) {
+export default function DocumentIdPage(props: Page) {
   const { width } = useContext(WidthContext)
   const Editor = useMemo(
     () => dynamic(() => import("./_components/editor"), { ssr: false }),
     []
   );
   const document = useQuery(api.documents.getById, {
-    documentId: params.documentId,
+    documentId: props.params.documentId,
   });
   const update = useMutation(api.documents.updateDocument);
   const onChange = (content: string) => {
     update({
-      id: params.documentId,
+      id: props.params.documentId,
       content,
     });
   };
