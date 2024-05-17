@@ -6,12 +6,12 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import NewUserPlaceholder from "../../_components/new-user-placeholder";
 
-export default function DocumentPage() {
+export default function DocumentPage(): JSX.Element {
   const router = useRouter();
   const createDocument = useMutation(api.documents.createDocument);
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (!isAuthenticated && isLoading) {
-    return null;
+    return redirect("/");
   }
   const onCreateDocument = () => {
     const promise = createDocument({ title: "Untitled" }).then((documentId) =>
