@@ -13,9 +13,8 @@ interface Page {
   params: {
     documentId: Id<"documents">;
   };
-  width: string;
 }
-export default function DocumentIdPage({ width, params }: Page) {
+export default function DocumentIdPage({ params }: Page) {
   const Editor = useMemo(
     () =>
       dynamic(

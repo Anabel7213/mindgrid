@@ -9,24 +9,26 @@ import { Loader } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useContext, useMemo } from "react";
 import { WidthContext } from "@/contexts/WidthContext";
-interface Page {
-  params: {
-    documentId: any;
-  };
-}
-export default function DocumentIdPage(props: Page) {
+import { useParams } from "next/navigation";
+// interface Page {
+//   params: {
+//     documentId: any;
+//   };
+// }
+export default function DocumentIdPage() {
+  const params = useParams()
   const { width } = useContext(WidthContext)
   const Editor = useMemo(
     () => dynamic(() => import("./_components/editor"), { ssr: false }),
     []
   );
   const document = useQuery(api.documents.getById, {
-    documentId: props.params.documentId,
+    documentId: params.documentId as Id<"documents">,
   });
   const update = useMutation(api.documents.updateDocument);
   const onChange = (content: string) => {
     update({
-      id: props.params.documentId,
+      id: params.documentId as Id<"documents">,
       content,
     });
   };
