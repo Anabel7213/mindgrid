@@ -12,7 +12,7 @@ import { WidthContext } from "@/contexts/WidthContext";
 interface Page {
   params: {
     documentId: Id<"documents">;
-  }
+  };
 }
 export default function DocumentIdPage({ params }: Page) {
   const { width } = useContext(WidthContext)
